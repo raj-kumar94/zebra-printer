@@ -12,9 +12,11 @@ closebtn.addEventListener('click', (e) => {
         console.log("printerTest:receive");
         console.log({data})
 
-        const printerNames = data.map(p => `<p>Printer Name: ${p.name}</p>`)
-        document.getElementById('printers-list').innerHTML = printerNames;
-        document.getElementById('printer-code').innerHTML = JSON.stringify(data, null, 2);
+        if(Array.isArray(data)) {
+            const printerNames = data.map(p => `<p>Printer Name: ${p.name}</p>`)
+            document.getElementById('printers-list').innerHTML = printerNames;
+            document.getElementById('printer-code').innerHTML = JSON.stringify(data, null, 2);
+        }
     });
 
 });
@@ -22,7 +24,8 @@ closebtn.addEventListener('click', (e) => {
 
 printPdfBtn.addEventListener('click', (e) => {
 
-    window.api.send("toMain", {action: "print_pdf"});
+    const printerName = document.getElementById('printer-name').value;
+    window.api.send("toMain", {action: "print_pdf", printerName});
 
     window.api.receive("fromMain", (data) => {
         if(data.response === 'success') {

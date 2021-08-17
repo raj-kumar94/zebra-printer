@@ -5,14 +5,14 @@ var printer = require('printer'),
 console.log("installed printers:\n"+util.inspect(printer.getPrinters(), {colors:true, depth:10}));
 
 
-let printerName = 'EPSON_L6170_Series';
+// let printerName = 'EPSON_L6170_Series';
 let filename = 'label.pdf';
 // console.log(process.env);
 
-printer.getJob(printerName, 21);
+// printer.getJob(printerName, 21);
 console.log("platform", process.platform);
 
-const printLabel = () => {
+const printLabel = (printerName) => {
     if (process.platform != 'win32') {
         printer.printFile({
             filename: filename,

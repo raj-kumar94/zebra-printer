@@ -35,8 +35,8 @@ contextBridge.exposeInMainWorld(
                     console.log({args})
                     
                     if(args && args[0] && args[0].action) {
-                        console.log("print command sent...");
-                        const labelPrinted = printLabel();
+                        console.log("print command sent to...", args[0].printerName);
+                        const labelPrinted = printLabel(args[0].printerName);
                         func(...args)
                     } else {
                         const printers = getPrinters(); 
